@@ -1,11 +1,13 @@
 package com.example.todolist
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -39,6 +41,24 @@ class MainActivity : AppCompatActivity() {
             item.setText("")
             save.writeData(itemList, applicationContext)
             arrayAdapter.notifyDataSetChanged()
+        }
+
+        view.setOnItemClickListener { adapterView, view, position, l ->
+            var alert = AlertDialog.Builder(this)
+            alert.setTitle("Delete")
+            alert.setMessage("Do you want to delete this item?")
+            alert.setCancelable(false)
+
+            alert.setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.cancel()
+            })
+
+            alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                itemList.removeAt(position)
+                arrayAdapter.notifyDataSetChanged()
+                save.writeData(itemList,applicationContext)
+            })
+            alert.create().show()
         }
 
     }
