@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         itemList = save.readData(this)
 
-        var arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList)
+        var arrayAdapter = ArrayAdapter(this, R.layout.row_layout, R.id.txt, itemList)
         view.adapter = arrayAdapter
 
         add.setOnClickListener{
